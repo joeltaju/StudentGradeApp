@@ -28,4 +28,19 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        Console.WriteLine("Applying migrations...");
+        db.Database.Migrate();
+        Console.WriteLine("Migrations completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Migration failed: {ex}");
+    }
+}
 app.Run();
