@@ -11,7 +11,10 @@ COPY ["StudentGradeApp.csproj", "./"]
 RUN dotnet restore "StudentGradeApp.csproj"
 
 COPY . .
-RUN dotnet publish "StudentGradeApp.csproj" -c Release -o /app/publish
+
+RUN dotnet publish "StudentGradeApp.csproj" \
+    -c Release \
+    -o /app/publish
 
 FROM base AS final
 WORKDIR /app
