@@ -1,0 +1,55 @@
+@model IEnumerable<StudentResultVM>
+
+<h2>Student Results</h2>
+
+<form method="get">
+
+    <input type="text"
+           name="search"
+           placeholder="Student Name"
+           value="@Context.Request.Query["search"]" />
+
+    <select name="remarks">
+
+        <option value="">All</option>
+
+        <option value="PASS">PASS</option>
+
+        <option value="FAIL">FAIL</option>
+
+    </select>
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<br />
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Subject Name</th>
+            <th>Grade</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.StudentName</td>
+            <td>@item.SubjectName</td>
+            <td>@item.Grade</td>
+            <td>@item.Remarks</td>
+        </tr>
+    }
+
+    </tbody>
+
+</table>
